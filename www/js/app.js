@@ -32,52 +32,77 @@ angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.transla
                 controller: 'AppCtrl'
             })
 
-            .state('app.search', {
-                url: '/search',
+            .state('app.work', {
+                url: '/work',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/search.html'
+                        templateUrl: 'templates/work.html',
+                        controller: 'WorkCtrl'
                     }
                 }
             })
 
-            .state('app.browse', {
-                url: '/browse',
+            .state('app.study', {
+                url: '/study',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/browse.html'
-                    }
-                }
-            })
-            .state('app.playlists', {
-                url: '/playlists',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/playlists.html',
-                        controller: 'PlaylistsCtrl'
+                        templateUrl: 'templates/study.html',
+                        controller: 'StudyCtrl'
                     }
                 }
             })
 
-            .state('app.single', {
-                url: '/playlists/:playlistId',
+            .state('app.life', {
+                url: '/life',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/playlist.html',
-                        controller: 'PlaylistCtrl'
+                        templateUrl: 'templates/life.html',
+                        controller: 'LifeCtrl'
+                    }
+                }
+            })
+
+            .state('app.wallet', {
+                url: '/wallet',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/wallet.html',
+                        controller: 'WalletCtrl'
+                    }
+                }
+            })
+
+            .state('app.others', {
+                url: '/others',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/others.html',
+                        controller: 'OthersCtrl'
                     }
                 }
             });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/playlists');
+        $urlRouterProvider.otherwise('/app/work');
 
         $translateProvider.translations('en', {
+            APP_NAME: 'ime2me',
+            MENU_WORK: 'Work',
+            MENU_STUDY: 'Study',
+            MENU_LIFE: 'Life',
+            MENU_WALLET: 'Wallet',
+            MENU_OTHERS: 'Other',
             USER_NAME: 'UserName',
             PASSWORD: 'PassWord',
             LOGIN: 'Login'
         });
         $translateProvider.translations('zh', {
+            APP_NAME: '虚米',
+            MENU_WORK: '工作',
+            MENU_STUDY: '学习',
+            MENU_LIFE: '生活',
+            MENU_WALLET: '钱包',
+            MENU_OTHERS: '其他',
             USER_NAME: '用户名',
             PASSWORD: '密码',
             LOGIN: '登录'
