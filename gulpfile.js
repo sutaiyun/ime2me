@@ -7,7 +7,7 @@ var paths = {
   sass: ['./scss/**/*.scss']
 };
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['sass', 'copyJsLib']);
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
@@ -20,6 +20,12 @@ gulp.task('sass', function(done) {
     .pipe(rename({ extname: '.min.css' }))
     .pipe(gulp.dest('./www/css/'))
     .on('end', done);
+});
+
+gulp.task('copyJsLib', function(done) {
+    gulp.src('./bower_components/angular-translate/angular-translate.js')
+	.pipe(gulp.dest('./www/lib/ionic/js'))
+	.on('end', done);
 });
 
 gulp.task('watch', ['sass'], function() {
