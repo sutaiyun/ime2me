@@ -4,10 +4,14 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.translate'])
+angular.module('starter', ['ionic', 'starter.controllers',
+    'starter.services',
+    'pascalprecht.translate']);
+/*
 
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform, profileService) {
         $ionicPlatform.ready(function () {
+            console.log("sty debug ionicPlatform.ready !!!!");
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -20,10 +24,51 @@ angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.transla
                 StatusBar.styleDefault();
             }
         });
+
+        $ionicPlatform.on('pause', function() {
+            console.log('sty debug ionicPlatform.on----> pause');
+        });
+
+        $ionicPlatform.on('resume', function() {
+            //applicationService.appLockModal('check');
+            console.log('sty debug ionicPlatform.on----> resume');
+        });
+
+        $ionicPlatform.on('menubutton', function() {
+            //window.location = '#/preferences';
+            console.log('sty debug ionicPlatform.on----> menubutton');
+        });
+
+        profileService.loadAndBindProfile(function(err) {
+            if (err) {
+                if (err.message && err.message.match('NOPROFILE')) {
+                    $log.debug('No profile... redirecting');
+                    $state.go('onboarding.welcome');
+                } else {
+                    throw new Error(err); // TODO
+                }
+            } else {
+                $log.debug('Profile loaded ... Starting UX.');
+
+                $state.go('starting', {}, {
+                    'reload': true,
+                    'notify': $state.current.name == 'starting' ? false : true
+                }).then(function() {
+                    $state.transitionTo('work').then(function() {
+                    });
+                });
+            };
+        });
     })
 
     .config(function ($stateProvider, $urlRouterProvider, $translateProvider) {
         $stateProvider
+
+            .state('login', {
+                url: '/login',
+                templateUrl: 'templates/login.html',
+                controller: 'AppCtrl'
+            })
 
             .state('app', {
                 url: '/app',
@@ -83,7 +128,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.transla
             });
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/work');
+        $urlRouterProvider.otherwise('login');
 
         $translateProvider.translations('en', {
             APP_NAME: 'ime2me',
@@ -94,7 +139,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.transla
             MENU_OTHERS: 'Other',
             USER_NAME: 'UserName',
             PASSWORD: 'PassWord',
-            LOGIN: 'Login'
+            LOGIN_SUBMIT: 'Login'
         });
         $translateProvider.translations('zh', {
             APP_NAME: '虚米',
@@ -105,7 +150,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'pascalprecht.transla
             MENU_OTHERS: '其他',
             USER_NAME: '用户名',
             PASSWORD: '密码',
-            LOGIN: '登录'
+            LOGIN_SUBMIT: '登录'
         });
         $translateProvider.preferredLanguage('zh');
     });
+    */
+
+angular.module('starter.services', []);
